@@ -1,11 +1,15 @@
 package com.wcig.app;
 
+import com.wcig.app.event.EmailService;
 import com.wcig.app.lifecycle.LifeCycleBean;
 import com.wcig.app.primary.PrimaryService;
 import com.wcig.app.qualifier.QualifierService;
 import com.wcig.app.required.RequiredAService;
 import com.wcig.app.resource.ResourceAService;
-import com.wcig.app.scope.*;
+import com.wcig.app.scope.PrototypeBean;
+import com.wcig.app.scope.SingletonAppContextBean;
+import com.wcig.app.scope.SingletonBean;
+import com.wcig.app.scope.SingletonLookupBean;
 import com.wcig.app.service.AService;
 import com.wcig.app.value.DefaultConfig;
 import com.wcig.app.value.InjectConfig;
@@ -14,6 +18,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+// @EnableAsync
 @Configuration
 @ComponentScan
 public class App {
@@ -29,6 +34,7 @@ public class App {
         testLifeCycle();
         testValue();
         testComponent();
+        testApplicationEvent();
     }
 
     // 声明方式注入
@@ -119,5 +125,12 @@ public class App {
 
     // @Component,@Repository,@Service,@Controller: 4种注解功能类似,只有语意上的区别,分别表名是组件,持久层组件,业务层组件,控制层组件
     private static void testComponent() {
+    }
+
+    // ApplicationEvent注册事件: 处理事件可以是同步也可以是异步,需根据实际场景使用
+    private static void testApplicationEvent() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        EmailService emailService = ctx.getBean(EmailService.class);
+        emailService.sendEmail("a1@example.org", "email content");
     }
 }
