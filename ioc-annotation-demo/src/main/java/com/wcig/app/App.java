@@ -3,6 +3,7 @@ package com.wcig.app;
 import com.wcig.app.primary.PrimaryService;
 import com.wcig.app.qualifier.QualifierService;
 import com.wcig.app.resource.ResourceAService;
+import com.wcig.app.scope.*;
 import com.wcig.app.service.AService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,6 +18,9 @@ public class App {
         testPrimary();
         testQualifier();
         testResource();
+        testScope();
+        testInjectPrototypeToSingleton1();
+        testInjectPrototypeToSingleton2();
     }
 
     // 声明方式注入
@@ -46,5 +50,41 @@ public class App {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         ResourceAService resourceAService = ctx.getBean(ResourceAService.class);
         resourceAService.test();
+    }
+
+    // @Scope注解: 定义Bean的范围
+    private static void testScope() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        SingletonBean firstSingleton = ctx.getBean(SingletonBean.class);
+        PrototypeBean firstPrototype = firstSingleton.getPrototypeBean();
+
+        // get singleton bean instance one more time
+        SingletonBean secondSingleton = ctx.getBean(SingletonBean.class);
+        PrototypeBean secondPrototype = secondSingleton.getPrototypeBean();
+
+        System.out.println(firstPrototype.equals(secondPrototype)); // true
+    }
+
+    // 注入Prototype Bean到Singleton Bean中: 注入ApplicationContext
+    // 参考: https://www.baeldung.com/spring-inject-prototype-bean-into-singleton
+    private static void testInjectPrototypeToSingleton1() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        SingletonAppContextBean s1 = ctx.getBean(SingletonAppContextBean.class);
+        PrototypeBean p1 = s1.getPrototypeBean();
+
+        SingletonAppContextBean s2 = ctx.getBean(SingletonAppContextBean.class);
+        PrototypeBean p2 = s2.getPrototypeBean();
+        System.out.println(p1 == p2); // false
+    }
+
+    // 注入Prototype Bean到Singleton Bean中: @Lookup方法注入
+    private static void testInjectPrototypeToSingleton2() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        SingletonLookupBean s1 = ctx.getBean(SingletonLookupBean.class);
+        PrototypeBean p1 = s1.getPrototypeBean();
+
+        SingletonLookupBean s2 = ctx.getBean(SingletonLookupBean.class);
+        PrototypeBean p2 = s2.getPrototypeBean();
+        System.out.println(p1 == p2); // false
     }
 }
