@@ -34,7 +34,7 @@ public class App {
         System.out.println(a1 == a2); // true
     }
 
-    // ApplicationEvent注册事件
+    // ApplicationEvent注册事件: 处理事件是同步的,需注意耗时问题
     private static void testApplicationEvent() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("application.xml");
         EmailService emailService = ctx.getBean(EmailService.class);
