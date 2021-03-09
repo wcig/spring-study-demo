@@ -3,7 +3,6 @@ package com.wcig.app.event;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 public class EmailService implements ApplicationEventPublisherAware {
@@ -26,10 +25,5 @@ public class EmailService implements ApplicationEventPublisherAware {
             return;
         }
         System.out.println("send email..");
-    }
-
-    @PostConstruct
-    public void init() {
-        System.out.println(blockedList);
     }
 }

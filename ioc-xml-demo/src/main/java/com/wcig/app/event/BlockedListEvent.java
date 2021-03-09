@@ -12,4 +12,12 @@ public class BlockedListEvent extends ApplicationEvent {
         this.address = address;
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "BlockedListEvent{" +
+                "address='" + address + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

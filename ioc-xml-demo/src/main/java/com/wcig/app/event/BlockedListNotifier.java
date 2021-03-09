@@ -12,6 +12,7 @@ public class BlockedListNotifier implements ApplicationListener<BlockedListEvent
 
     @Override
     public void onApplicationEvent(BlockedListEvent event) {
-        // notify appropriate parties via notificationAddress...
+        System.out.printf("BlockedListNotifier receive event: %s, start notify address: %s\n",
+                event, this.notificationAddress);
     }
 }
