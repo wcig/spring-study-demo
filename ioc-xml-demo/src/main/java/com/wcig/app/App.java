@@ -14,11 +14,13 @@ public class App {
     // xml方式注入: 支持基于构造函数注入+基于set方法注入
     // 通过ApplicationContext获取Bean
     private static void testApplicationContext() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
-        AService a1 = context.getBean(AService.class);
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("application.xml");
+        AService a1 = ctx.getBean(AService.class);
         a1.test();
-        AService a2 = (AService) context.getBean("aService");
+        AService a2 = (AService) ctx.getBean("aService");
         System.out.println(a1 == a2); // true
+        AService a3 = ctx.getBean("aService", AService.class);
+        System.out.println(a1 == a3); // true
     }
 
     // 通过BeanFactory获取Bean
