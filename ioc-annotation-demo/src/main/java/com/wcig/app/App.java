@@ -28,6 +28,7 @@ public class App {
         testRequired();
         testLifeCycle();
         testValue();
+        testComponent();
     }
 
     // 声明方式注入
@@ -114,5 +115,9 @@ public class App {
         System.out.println(dc);
         InjectConfig ic = ctx.getBean(InjectConfig.class);
         System.out.println(ic);
+    }
+
+    // @Component,@Repository,@Service,@Controller: 4种注解功能类似,只有语意上的区别,分别表名是组件,持久层组件,业务层组件,控制层组件
+    private static void testComponent() {
     }
 }
