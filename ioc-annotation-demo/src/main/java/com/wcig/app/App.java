@@ -41,7 +41,7 @@ public class App {
     }
 
     // @Resource注解: 几乎等价于@Autowired
-    // @Autowired,@Resource区别: 功能都是注入Bean,区别在与:1)适用范围不同;2)来源不同前者是spring后者是java注解;3)注入规则不同,前者先byType,指定了Qualifier则byName,后者byName->byType->byName,byType
+    // @Autowired,@Resource区别: 功能都是注入Bean,区别在与:1)适用范围不同;2)来源不同,前者是spring后者是java注解;3)注入规则不同,前者先byType,指定了Qualifier则byName,后者byName->byType->byName,byType
     private static void testResource() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         ResourceAService resourceAService = ctx.getBean(ResourceAService.class);
