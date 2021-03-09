@@ -2,6 +2,7 @@ package com.wcig.app;
 
 import com.wcig.app.primary.PrimaryService;
 import com.wcig.app.qualifier.QualifierService;
+import com.wcig.app.required.RequiredAService;
 import com.wcig.app.resource.ResourceAService;
 import com.wcig.app.scope.*;
 import com.wcig.app.service.AService;
@@ -21,6 +22,7 @@ public class App {
         testScope();
         testInjectPrototypeToSingleton1();
         testInjectPrototypeToSingleton2();
+        testRequired();
     }
 
     // 声明方式注入
@@ -52,7 +54,7 @@ public class App {
         resourceAService.test();
     }
 
-    // @Scope注解: 定义Bean的范围
+    // @Scope注解: 定义Bean的范围,默认scope为单例
     private static void testScope() {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         SingletonBean firstSingleton = ctx.getBean(SingletonBean.class);
@@ -86,5 +88,11 @@ public class App {
         SingletonLookupBean s2 = ctx.getBean(SingletonLookupBean.class);
         PrototypeBean p2 = s2.getPrototypeBean();
         System.out.println(p1 == p2); // false
+    }
+
+    // required参数: 默认是true,不建议使用
+    private static void testRequired() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        RequiredAService requiredAService = ctx.getBean(RequiredAService.class);
     }
 }
