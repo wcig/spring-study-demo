@@ -7,6 +7,8 @@ import com.wcig.app.required.RequiredAService;
 import com.wcig.app.resource.ResourceAService;
 import com.wcig.app.scope.*;
 import com.wcig.app.service.AService;
+import com.wcig.app.value.DefaultConfig;
+import com.wcig.app.value.InjectConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +27,7 @@ public class App {
         testInjectPrototypeToSingleton2();
         testRequired();
         testLifeCycle();
+        testValue();
     }
 
     // 声明方式注入
@@ -98,9 +101,18 @@ public class App {
         RequiredAService requiredAService = ctx.getBean(RequiredAService.class);
     }
 
-    // 生命周期
+    // 生命周期lifecycle
     private static void testLifeCycle() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         LifeCycleBean lifeCycleBean = ctx.getBean(LifeCycleBean.class);
+    }
+
+    // @Value注解: 从配置文件读取值
+    private static void testValue() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        DefaultConfig dc = ctx.getBean(DefaultConfig.class);
+        System.out.println(dc);
+        InjectConfig ic = ctx.getBean(InjectConfig.class);
+        System.out.println(ic);
     }
 }
