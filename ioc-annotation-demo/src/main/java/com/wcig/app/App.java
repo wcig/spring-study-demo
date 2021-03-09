@@ -1,5 +1,6 @@
 package com.wcig.app;
 
+import com.wcig.app.lifecycle.LifeCycleBean;
 import com.wcig.app.primary.PrimaryService;
 import com.wcig.app.qualifier.QualifierService;
 import com.wcig.app.required.RequiredAService;
@@ -23,6 +24,7 @@ public class App {
         testInjectPrototypeToSingleton1();
         testInjectPrototypeToSingleton2();
         testRequired();
+        testLifeCycle();
     }
 
     // 声明方式注入
@@ -90,9 +92,15 @@ public class App {
         System.out.println(p1 == p2); // false
     }
 
-    // required参数: 默认是true,不建议使用
+    // 可选注入required参数: 默认是true,不建议使用
     private static void testRequired() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         RequiredAService requiredAService = ctx.getBean(RequiredAService.class);
+    }
+
+    // 生命周期
+    private static void testLifeCycle() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        LifeCycleBean lifeCycleBean = ctx.getBean(LifeCycleBean.class);
     }
 }
