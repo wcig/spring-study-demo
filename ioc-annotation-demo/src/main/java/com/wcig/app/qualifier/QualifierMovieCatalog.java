@@ -1,12 +1,12 @@
-package com.wcig.app.model;
+package com.wcig.app.qualifier;
 
-public class MovieCatalog {
+public class QualifierMovieCatalog {
     private String name;
 
-    public MovieCatalog() {
+    public QualifierMovieCatalog() {
     }
 
-    public MovieCatalog(String name) {
+    public QualifierMovieCatalog(String name) {
         this.name = name;
     }
 
