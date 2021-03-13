@@ -28,6 +28,7 @@ public class App {
         testQualifier();
         testResource();
         testScope();
+        testInjectPrototypeToSingleton();
         testInjectPrototypeToSingleton1();
         testInjectPrototypeToSingleton2();
         testRequired();
@@ -66,8 +67,20 @@ public class App {
         resourceAService.test();
     }
 
-    // @Scope注解: 定义Bean的范围,默认scope为单例
+    // @Scope注解: 定义Bean的范围,默认scope为单例,prototype范围每次获取的Bean为新的实例
     private static void testScope() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        SingletonBean s1 = ctx.getBean(SingletonBean.class);
+        SingletonBean s2 = ctx.getBean(SingletonBean.class);
+        System.out.println(s1 == s2); // true
+
+        PrototypeBean p1 = ctx.getBean(PrototypeBean.class);
+        PrototypeBean p2 = ctx.getBean(PrototypeBean.class);
+        System.out.println(p1 == p2); // false
+    }
+
+    // 注入Prototype Bean到Singleton Bean中: 如果不做特殊处理注入的Prototype Bean都是同一个实例,prototype scope并没有生效
+    private static void testInjectPrototypeToSingleton() {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         SingletonBean firstSingleton = ctx.getBean(SingletonBean.class);
         PrototypeBean firstPrototype = firstSingleton.getPrototypeBean();
