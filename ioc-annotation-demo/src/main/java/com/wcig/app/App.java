@@ -3,6 +3,7 @@ package com.wcig.app;
 import com.wcig.app.event.EmailService;
 import com.wcig.app.lifecycle.LifeCycleBean;
 import com.wcig.app.primary.PrimaryService;
+import com.wcig.app.profile.DataSourceConfig;
 import com.wcig.app.qualifier.QualifierService;
 import com.wcig.app.required.RequiredAService;
 import com.wcig.app.resource.ResourceAService;
@@ -36,6 +37,7 @@ public class App {
         testValue();
         testComponent();
         testApplicationEvent();
+        testProfile();
     }
 
     // 声明方式注入
@@ -146,5 +148,14 @@ public class App {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         EmailService emailService = ctx.getBean(EmailService.class);
         emailService.sendEmail("a1@example.org", "email content");
+    }
+
+    // @Profile注解
+    private static void testProfile() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        DataSourceConfig cfg = ctx.getBean(DataSourceConfig.class);
+        cfg.printCurrentDatasource();
+        cfg.printCurrentProfile1();
+        cfg.printCurrentProfile2();
     }
 }
