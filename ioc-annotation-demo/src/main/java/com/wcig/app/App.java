@@ -38,6 +38,7 @@ public class App {
         testComponent();
         testApplicationEvent();
         testProfile();
+        testConditional();
     }
 
     // 声明方式注入
@@ -157,5 +158,10 @@ public class App {
         cfg.printCurrentDatasource();
         cfg.printCurrentProfile1();
         cfg.printCurrentProfile2();
+    }
+
+    // @Conditional注解
+    private static void testConditional() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
     }
 }
