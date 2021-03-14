@@ -39,6 +39,7 @@ public class App {
         testApplicationEvent();
         testProfile();
         testConditional();
+        testComponentScan();
     }
 
     // 声明方式注入
@@ -163,5 +164,13 @@ public class App {
     // @Conditional注解
     private static void testConditional() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+    }
+
+    // @ComponentScan
+    private static void testComponentScan() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        for (String beanName : ctx.getBeanDefinitionNames()) {
+            System.out.println(beanName);
+        }
     }
 }
