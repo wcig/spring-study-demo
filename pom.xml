@@ -11,8 +11,9 @@
     <modules>
         <module>ioc-xml-demo</module>
         <module>ioc-annotation-demo</module>
-      <module>resource-demo</module>
-  </modules>
+        <module>resource-demo</module>
+        <module>aop-demo</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
