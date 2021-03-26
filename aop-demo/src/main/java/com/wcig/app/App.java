@@ -19,14 +19,45 @@ public class App {
         testAop3();
     }
 
+    // 测试@AspectJ的5种通知类型: @Before,@After,@Around,@AfterReturning,@AfterThrowing
     private static void testAop1() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
         AService aService = ctx.getBean(AService.class);
+        System.out.println("---@AspectJ Before---");
+        aService.testBefore();
+
+        System.out.println("---@AspectJ After---");
+        aService.testAfter();
+
+        System.out.println("---@AspectJ Around---");
+        aService.testAround();
+
+        try {
+            System.out.println("---@AspectJ AfterReturning---");
+            aService.testAfterReturning1();
+            aService.testAfterReturning2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println("---@AspectJ AfterThrowing---");
+            aService.testAfterThrowing1();
+            aService.testAfterThrowing2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("---@AspectJ---");
         aService.test();
+        // ...
+        // ---@AspectJ---
         // [Around] LoggingAspect doAround start..
         // [Before] LoggingAspect doBefore..
         // AService test..
         // [Around] LoggingAspect doAround end..
+        // [After] LoggingAspect doAfter..
+        // [AfterReturning] LoggingAspect doAfterReturning..
     }
 
     private static void testAop2() {
