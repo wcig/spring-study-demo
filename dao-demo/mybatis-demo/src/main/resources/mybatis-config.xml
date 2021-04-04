@@ -17,6 +17,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/FirstMapper.xml"/>
+        <mapper resource="sqlmap/FirstMapper.xml"/>
     </mappers>
 </configuration>

@@ -21,8 +21,8 @@ public class MybatisDemoAppTest {
             InputStream inputStream = Resources.getResourceAsStream(resource);
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession session = sqlSessionFactory.openSession();
-            FirstMapper userMapper = session.getMapper(FirstMapper.class);
-            User user = userMapper.selectById(4);
+            FirstMapper firstMapper = session.getMapper(FirstMapper.class);
+            User user = firstMapper.selectById(4);
             log.info("result user: {}", user);
         } catch (IOException e) {
             e.printStackTrace();
