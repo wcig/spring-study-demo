@@ -3,6 +3,7 @@
 *.iml
 out
 gen
+log
 .vscode/
 
 # Maven
