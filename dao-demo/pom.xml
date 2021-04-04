@@ -16,7 +16,8 @@
 
     <modules>
         <module>jdbc-demo</module>
-    </modules>
+      <module>mybatis-demo</module>
+  </modules>
 
     <dependencies>
         <!-- mysql驱动 -->
