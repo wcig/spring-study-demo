@@ -30,6 +30,7 @@ public class DBConfig {
     @Value("${jdbc.password}")
     private String password;
 
+    // 初始druid数据源
     @Bean
     public DataSource druidDatasource() {
         DruidDataSource dataSource = new DruidDataSource();
@@ -43,6 +44,7 @@ public class DBConfig {
         return dataSource;
     }
 
+    // 初始化mybatis SqlSessionFactory
     @Bean
     public SqlSessionFactory initSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -51,11 +53,13 @@ public class DBConfig {
         return sqlSessionFactoryBean.getObject();
     }
 
+    // 以spring方式配置事务
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(druidDatasource());
     }
 
+    // 配置mybatis xml映射文件扫描路径
     public Resource[] resolveMapperLocations() throws Exception {
         ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
         return resourceResolver.getResources("classpath*:sqlmap/**/*.xml");
