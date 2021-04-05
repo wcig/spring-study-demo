@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcig.app.dao.sample.InsertMapper">
+    <resultMap id="BaseResultMap" type="com.wcig.app.model.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, `name`, phone, password, create_time
+    </sql>
+
+    <insert id="insert" parameterType="com.wcig.app.model.User">
+        INSERT INTO user (id, `name`, phone, password, create_time)
+        VALUES (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertUseGeneratedKeys" parameterType="com.wcig.app.model.User"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO user (id, `name`, phone, password, create_time)
+        VALUES (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
+    </insert>
+</mapper>
