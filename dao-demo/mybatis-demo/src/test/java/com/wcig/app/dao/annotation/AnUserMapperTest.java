@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= MybatisDemoApp.class)
-@FixMethodOrder(MethodSorters.JVM)
+@FixMethodOrder(MethodSorters.JVM) // 设置单元测试类的方法执行顺序
 public class AnUserMapperTest {
 
     @Resource

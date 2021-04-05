@@ -14,6 +14,8 @@ import java.io.InputStream;
 
 @Slf4j
 public class MybatisDemoAppTest {
+
+    // 不使用spring从xml文件中构建SqlSessionFactory
     @Test
     public void testMybatisSimple() {
         String resource = "mybatis-config.xml";
@@ -28,4 +30,5 @@ public class MybatisDemoAppTest {
             e.printStackTrace();
         }
     }
+
 }

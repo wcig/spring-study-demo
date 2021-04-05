@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+// 注解方式使用mybatis (不推荐)
 public interface AnUserMapper {
 
     @Delete("DELETE FROM user")
@@ -42,4 +43,5 @@ public interface AnUserMapper {
 
     @Update("UPDATE user SET password = #{password} WHERE id = #{id}")
     int updateById(@Param("password") String password, @Param("id") long id);
+
 }
