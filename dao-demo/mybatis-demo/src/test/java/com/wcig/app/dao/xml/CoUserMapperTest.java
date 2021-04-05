@@ -1,4 +1,4 @@
-package com.wcig.app.dao.annotation;
+package com.wcig.app.dao.xml;
 
 import com.wcig.app.MybatisDemoApp;
 import com.wcig.app.model.User;
@@ -17,10 +17,10 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= MybatisDemoApp.class)
 @FixMethodOrder(MethodSorters.JVM) // 设置单元测试类的方法执行顺序
-public class AnUserMapperTest {
+public class CoUserMapperTest {
 
     @Resource
-    private AnUserMapper userMapper;
+    private CoUserMapper userMapper;
 
     @Test
     public void testDeleteAll() {

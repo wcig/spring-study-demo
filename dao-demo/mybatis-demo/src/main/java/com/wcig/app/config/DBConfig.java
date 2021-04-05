@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
+// 使用配置类+注解方式集成mybatis,不需要mybatis-config.xml
 @Configuration
 @PropertySource("classpath:jdbc.properties")
-@MapperScan("com.wcig.app.dao.annotation")
+@MapperScan("com.wcig.app.dao")
 public class DBConfig {
 
     @Value("${jdbc.url}")
@@ -43,6 +47,7 @@ public class DBConfig {
     public SqlSessionFactory initSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(druidDatasource());
+        sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
         return sqlSessionFactoryBean.getObject();
     }
 
@@ -50,4 +55,10 @@ public class DBConfig {
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(druidDatasource());
     }
+
+    public Resource[] resolveMapperLocations() throws Exception {
+        ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
+        return resourceResolver.getResources("classpath*:sqlmap/**/*.xml");
+    }
+
 }
