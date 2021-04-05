@@ -23,7 +23,8 @@
                 #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
     </insert>
 
-    <insert id="insertUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id" parameterType="com.wcig.app.model.User">
+    <insert id="insertUseGeneratedKeys" parameterType="com.wcig.app.model.User"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO user (id, `name`, phone, password, create_time)
         VALUES (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
                 #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
