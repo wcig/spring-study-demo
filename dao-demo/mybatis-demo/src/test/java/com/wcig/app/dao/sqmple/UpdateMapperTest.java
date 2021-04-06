@@ -34,10 +34,20 @@ public class UpdateMapperTest {
             long id = userList.get(0).getId();
             User user = new User();
             user.setId(id);
-            user.setName("tom");
             user.setPassword("111111");
             int num  = mapper.updateByPk(user);
             log.info("updateByPk affected num: {}", num);
+        }
+    }
+
+    @Test
+    public void testUpdateNameById() {
+        List<User> userList = userMapper.selectListByName("tom");
+        if (!userList.isEmpty()) {
+            long id = userList.get(0).getId();
+            String newPwd = "111111";
+            int num  = mapper.updatePasswordById(id, newPwd);
+            log.info("updatePasswordById affected num: {}", num);
         }
     }
 }

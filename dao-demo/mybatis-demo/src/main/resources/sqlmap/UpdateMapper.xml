@@ -28,4 +28,8 @@
         </set>
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
+
+    <update id="updatePasswordById">
+        Update user SET `password` = #{password,jdbcType=VARCHAR} WHERE id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
