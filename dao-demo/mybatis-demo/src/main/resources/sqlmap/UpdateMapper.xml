@@ -32,4 +32,48 @@
     <update id="updatePasswordById">
         Update user SET `password` = #{password,jdbcType=VARCHAR} WHERE id = #{id,jdbcType=BIGINT}
     </update>
+
+    <update id="updateByMap" parameterType="java.util.Map">
+        UPDATE user
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE name = #{name,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateSelectByMap">
+        UPDATE user
+        <set>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="condition != null">
+            <where>
+                <if test="condition.id != null">
+                    id = #{condition.id,jdbcType=BIGINT}
+                </if>
+                <if test="condition.name != null">
+                    AND `name` = #{condition.name,jdbcType=VARCHAR}
+                </if>
+                <if test="condition.phone != null">
+                    AND phone = #{condition.phone,jdbcType=VARCHAR}
+                </if>
+                <if test="condition.password != null">
+                    AND password = #{condition.password,jdbcType=VARCHAR}
+                </if>
+            </where>
+        </if>
+    </update>
 </mapper>

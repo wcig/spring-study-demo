@@ -13,7 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,6 +50,35 @@ public class UpdateMapperTest {
             String newPwd = "111111";
             int num  = mapper.updatePasswordById(id, newPwd);
             log.info("updatePasswordById affected num: {}", num);
+        }
+    }
+
+    @Test
+    public void TestUpdateByMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "tom");
+        map.put("password", "111111");
+        int num = mapper.updateByMap(map);
+        log.info("updateByMap affected num: {}", num);
+    }
+
+    @Test
+    public void TestUpdateSelectByMap() {
+        {
+            User user = new User();
+            user.setName("tom");
+            user.setPassword("111111");
+            int num = mapper.updateSelectByMap(user, null);
+            log.info("updateSelectByMap affected num: {}", num);
+        }
+        {
+            User user = new User();
+            user.setPassword("123456");
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", "tom");
+            map.put("password", "111111");
+            int num = mapper.updateSelectByMap(user, map);
+            log.info("updateSelectByMap affected num: {}", num);
         }
     }
 }
