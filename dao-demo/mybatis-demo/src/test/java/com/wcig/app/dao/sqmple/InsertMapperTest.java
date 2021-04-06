@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,23 +26,27 @@ public class InsertMapperTest {
 
     @Test
     public void testInsert() {
-        User user = new User();
-        user.setName("tom");
-        user.setPhone("13500001111");
-        user.setPassword("123456");
-        user.setCreateTime(System.currentTimeMillis());
+        User user = new User("tom", "13500001111", "123456", System.currentTimeMillis());
         boolean result = mapper.insert(user) > 0;
         log.info("insert user result: {}", result);
     }
 
     @Test
     public void testInsertUseGeneratedKeys() {
-        User user = new User();
-        user.setName("jerry");
-        user.setPhone("13500002222");
-        user.setPassword("123456");
-        user.setCreateTime(System.currentTimeMillis());
+        User user = new User("jerry", "13500002222", "123456", System.currentTimeMillis());
         boolean result = mapper.insertUseGeneratedKeys(user) > 0;
         log.info("insertUseGeneratedKeys result:{}, user id: {}", result, user.getId());
+    }
+
+    @Test
+    public void testBatchInsert() {
+        List<User> list = new ArrayList<>();
+        list.add(new User("tom", "13500001111", "123456", System.currentTimeMillis()));
+        list.add(new User("jerry", "13500002222", "123456", System.currentTimeMillis()));
+        int num = mapper.batchInsertUseGeneratedKeys(list);
+        log.info("batchInsert success num: {}", num);
+        if (num == list.size()) {
+            log.info("batchInsert success user id list: {}, {}", list.get(0).getId(), list.get(1).getId());
+        }
     }
 }

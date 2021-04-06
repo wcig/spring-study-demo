@@ -25,4 +25,21 @@
         VALUES (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
                 #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
     </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO user (id, `name`, phone, password, create_time) VALUES
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (#{item.id,jdbcType=BIGINT},#{item.name,jdbcType=VARCHAR},#{item.phone,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},#{item.createTime,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertUseGeneratedKeys" parameterType="java.util.List"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO user (id, `name`, phone, password, create_time) VALUES
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (#{item.id,jdbcType=BIGINT},#{item.name,jdbcType=VARCHAR},#{item.phone,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},#{item.createTime,jdbcType=BIGINT})
+        </foreach>
+    </insert>
 </mapper>
