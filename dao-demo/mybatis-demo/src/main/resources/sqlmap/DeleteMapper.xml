@@ -20,15 +20,15 @@
     <delete id="deleteByMap">
         DELETE FROM user WHERE
         <choose>
-            <when test="condition != null and condition.size() > 0">
-                <if test="name != null">
-                    name = #{condition.name,jdbcType=VARCHAR}
+            <when test="map != null and map.size() > 0">
+                <if test="map.name != null">
+                    name = #{map.name,jdbcType=VARCHAR}
                 </if>
-                <if test="phone != null">
-                    AND phone = #{phone,jdbcType=VARCHAR}
+                <if test="map.phone != null">
+                    AND phone = #{map.phone,jdbcType=VARCHAR}
                 </if>
-                <if test="password != null">
-                    AND password = #{password,jdbcType=VARCHAR}
+                <if test="map.password != null">
+                    AND password = #{map.password,jdbcType=VARCHAR}
                 </if>
             </when>
             <otherwise>

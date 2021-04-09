@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface DeleteMapper {
     int deleteByPk(@Param("id") Long id);
-    int deleteByMap(@Param("condition") Map<String, Object> map);
+    int deleteByMap(@Param("map") Map<String, Object> map);
     int batchDeleteByPk(@Param("list") List<Long> list);
 }
