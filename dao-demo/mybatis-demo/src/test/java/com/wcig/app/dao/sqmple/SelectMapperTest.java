@@ -2,8 +2,11 @@ package com.wcig.app.dao.sqmple;
 
 import com.wcig.app.MybatisDemoApp;
 import com.wcig.app.dao.sample.SelectMapper;
+import com.wcig.app.dao.xml.CoUserMapper;
 import com.wcig.app.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +15,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,11 +28,57 @@ import javax.annotation.Resource;
 public class SelectMapperTest {
 
     @Resource
+    CoUserMapper userMapper;
+    @Resource
     private SelectMapper mapper;
+
+    @Before
+    public void initData() {
+        User user = new User("tom", "13500001111", "123456", System.currentTimeMillis());
+        int num = userMapper.insert(user);
+        assertEquals(1, num);
+    }
+
+    @After
+    public void releaseData() {
+        userMapper.deleteAll();
+    }
 
     @Test
     public void testSelectByPk() {
-        User user = mapper.selectByPk(13L);
+        List<User> list = userMapper.selectListByName("tom");
+        assertTrue(list.size() > 0);
+
+        long id = list.get(0).getId();
+        User user = mapper.selectByPk(id);
         log.info("selectByPk result user: {}", user);
+        assertNotNull(user);
+    }
+
+    @Test
+    public void testSelectByName() {
+        List<User> list = mapper.selectByName("tom");
+        log.info("selectByName result user list: {}", list);
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
+    public void testSelectByModel() {
+        User user = new User();
+        user.setName("tom");
+        user.setPassword("123456");
+        List<User> list = mapper.selectByModel(user);
+        log.info("selectByModel result user list: {}", list);
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
+    public void testSelectByMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "tom");
+        map.put("password", "123456");
+        List<User> list = mapper.selectByMap(map);
+        log.info("selectByMap result user list: {}", list);
+        assertTrue(list.size() > 0);
     }
 }
