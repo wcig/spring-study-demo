@@ -57,4 +57,22 @@
         </where>
         ORDER BY create_time DESC
     </select>
+
+    <select id="selectByModelWithPage2" parameterType="com.wcig.app.model.User" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM user
+        <where>
+            <if test="user.id != null">
+                id = #{user.id,jdbcType=BIGINT}
+            </if>
+            <if test="user.name != null">
+                AND name = #{user.name,jdbcType=VARCHAR}
+            </if>
+            <if test="user.phone != null">
+                AND phone = #{user.phone,jdbcType=VARCHAR}
+            </if>
+            <if test="user.password != null">
+                AND password = #{user.password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

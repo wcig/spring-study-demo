@@ -1,6 +1,7 @@
 package com.wcig.app.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,6 +15,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 // 使用配置类+注解方式集成mybatis,不需要mybatis-config.xml
 @Configuration
@@ -50,6 +52,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(druidDatasource());
         sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
+        sqlSessionFactoryBean.setPlugins(initPageHelperInterceptor());
         return sqlSessionFactoryBean.getObject();
     }
 
@@ -65,4 +68,14 @@ public class DBConfig {
         return resourceResolver.getResources("classpath*:sqlmap/**/*.xml");
     }
 
+    // 配置mybatis分页
+    public PageInterceptor initPageHelperInterceptor() {
+        Properties pageInterceptorProperties = new Properties();
+        pageInterceptorProperties.setProperty("helperDialect", "mysql");
+        pageInterceptorProperties.setProperty("supportMethodsArguments", "true");
+
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        pageInterceptor.setProperties(pageInterceptorProperties);
+        return pageInterceptor;
+    }
 }

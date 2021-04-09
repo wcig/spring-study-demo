@@ -35,8 +35,12 @@ public class SelectMapperTest {
     @Before
     public void initData() {
         User user = new User("tom", "13500001111", "123456", System.currentTimeMillis());
-        int num = userMapper.insert(user);
-        assertEquals(1, num);
+        for(int i=0; i<100; i++) {
+            User u = user.copy();
+            u.setCreateTime(System.currentTimeMillis());
+            int num = userMapper.insert(u);
+            assertEquals(1, num);
+        }
     }
 
     @After
@@ -79,6 +83,24 @@ public class SelectMapperTest {
         map.put("password", "123456");
         List<User> list = mapper.selectByMap(map);
         log.info("selectByMap result user list: {}", list);
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
+    public void testSelectByModelWithPage() {
+        User user = new User();
+        user.setName("tom");
+        List<User> list = mapper.selectByModelWithPage(user, 3, 10);
+        log.info("selectByModelWithPage result user list: {}", list);
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
+    public void testSelectByModelWithPage2() {
+        User user = new User();
+        user.setName("tom");
+        List<User> list = mapper.selectByModelWithPage2(user, 3, 10);
+        log.info("selectByModelWithPage2 result user list: {}", list);
         assertTrue(list.size() > 0);
     }
 }
