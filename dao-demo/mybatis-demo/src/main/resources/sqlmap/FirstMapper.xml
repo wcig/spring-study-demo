@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wcig.app.dao.FirstMapper">
     <select id="selectById" resultType="com.wcig.app.model.User">
-        select * from user where id = #{id}
+           select id, name, phone, password, create_time as createTime from user where id = #{id}
     </select>
 </mapper>
