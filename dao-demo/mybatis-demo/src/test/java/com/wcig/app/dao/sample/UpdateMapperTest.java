@@ -1,7 +1,6 @@
-package com.wcig.app.dao.sqmple;
+package com.wcig.app.dao.sample;
 
 import com.wcig.app.MybatisDemoApp;
-import com.wcig.app.dao.sample.UpdateMapper;
 import com.wcig.app.dao.xml.CoUserMapper;
 import com.wcig.app.model.User;
 import lombok.extern.slf4j.Slf4j;

@@ -34,8 +34,12 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="${basePackage}.mapper"
-                         targetProject="${basePath}/src/main/java">
+        <!--<sqlMapGenerator targetPackage="${basePackage}.mapper"-->
+        <!--                 targetProject="${basePath}/src/main/java">-->
+        <!--    <property name="enableSubPackages" value="true"/>-->
+        <!--</sqlMapGenerator>-->
+        <sqlMapGenerator targetPackage="resources/sqlmap"
+                         targetProject="${basePath}/src/main/">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
