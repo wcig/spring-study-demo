@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App {
+public class MybatisGeneratorApp {
     public static void main( String[] args ) throws Exception {
         List<String> warnings = new ArrayList<>();
         InputStream inputStream = Resources.class.getClassLoader().getResourceAsStream("generatorConfig.xml");
