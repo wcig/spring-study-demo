@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration PUBLIC
-        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
 <generatorConfiguration>
+    <!--引用外部属性配置文件-->
     <properties resource="generatorConfig.properties"/>
 
+    <!--单个数据库环境配置-->
     <context id="main" defaultModelType="flat" targetRuntime="MyBatis3">
+        <!--环境属性配置-->
         <property name="javaFileEncoding" value="UTF-8"/>
-        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
-        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 
+        <!--使用插件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
-        <!-- 关闭默认注释 -->
+        <!--注释配置-->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
+        <!--连接数据库配置-->
         <jdbcConnection driverClass="${jdbc.driver}"
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.username}"
                         password="${jdbc.password}">
-            <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
-        <javaTypeResolver>
-            <property name="forceBigDecimals" value="false" />
-        </javaTypeResolver>
+        <!--数据库类型对应java类型解析配置-->
+        <javaTypeResolver type="com.wcig.app.DefaultJavaTypeResolver"/>
 
-        <javaModelGenerator targetPackage="${basePackage}.entity"
+        <!--自动生成java bean配置-->
+        <javaModelGenerator targetPackage="${basePackage}.dao.entity"
                             targetProject="${basePath}/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!--<sqlMapGenerator targetPackage="${basePackage}.mapper"-->
-        <!--                 targetProject="${basePath}/src/main/java">-->
-        <!--    <property name="enableSubPackages" value="true"/>-->
-        <!--</sqlMapGenerator>-->
-        <sqlMapGenerator targetPackage="resources/sqlmap"
-                         targetProject="${basePath}/src/main/">
+        <!--自动生成sqlmap xml文件配置-->
+        <sqlMapGenerator targetPackage="${basePackage}.dao.mapper"
+                         targetProject="${basePath}/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
+        <!--自动生成java mapper接口配置-->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="${basePackage}.mapper"
+                             targetPackage="${basePackage}.dao.mapper"
                              targetProject="${basePath}/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user"/>
+        <table tableName="%"/>
     </context>
 </generatorConfiguration>
