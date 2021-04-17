@@ -1,4 +1,4 @@
-package com.wcig.app;
+package com.wcig.app.plugin;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -40,7 +40,9 @@ public class UseGeneratedKeysPlugin extends PluginAdapter {
         return true;
     }
 
-    // insert方法添加useGeneratedKeys相关属性
+    /**
+     * insert方法添加useGeneratedKeys相关属性
+     */
     public void addUseGeneratedKeysAttributes(XmlElement element, IntrospectedTable introspectedTable) {
         boolean addedGeneratedKey = introspectedTable.getGeneratedKey() != null;
         // 必须table没有配置子元素generatedKey

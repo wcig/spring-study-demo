@@ -1,4 +1,4 @@
-package com.wcig.app;
+package com.wcig.app.resolver;
 
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl;

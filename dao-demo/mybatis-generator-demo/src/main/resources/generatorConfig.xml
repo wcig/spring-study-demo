@@ -14,7 +14,8 @@
 
         <!--使用插件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
-        <plugin type="com.wcig.app.UseGeneratedKeysPlugin"/>
+        <plugin type="com.wcig.app.plugin.UseGeneratedKeysPlugin"/>
+        <plugin type="com.wcig.app.plugin.JavaModelFormatterPlugin"/>
 
         <!--注释配置-->
         <commentGenerator>
@@ -26,10 +27,12 @@
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.username}"
                         password="${jdbc.password}">
+            <!--获取表注释信息-->
+            <property name="useInformationSchema" value="true" />
         </jdbcConnection>
 
         <!--数据库类型对应java类型解析配置-->
-        <javaTypeResolver type="com.wcig.app.DefaultJavaTypeResolver"/>
+        <javaTypeResolver type="com.wcig.app.resolver.DefaultJavaTypeResolver"/>
 
         <!--自动生成java bean配置-->
         <javaModelGenerator targetPackage="${basePackage}.dao.entity"
