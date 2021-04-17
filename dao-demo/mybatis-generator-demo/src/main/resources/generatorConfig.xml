@@ -14,6 +14,7 @@
 
         <!--使用插件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="com.wcig.app.UseGeneratedKeysPlugin"/>
 
         <!--注释配置-->
         <commentGenerator>
