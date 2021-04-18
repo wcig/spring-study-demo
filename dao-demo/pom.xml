@@ -17,7 +17,6 @@
     <modules>
         <module>jdbc-demo</module>
         <module>mybatis-demo</module>
-        <module>mybatis-generator-demo</module>
     </modules>
 
     <dependencies>

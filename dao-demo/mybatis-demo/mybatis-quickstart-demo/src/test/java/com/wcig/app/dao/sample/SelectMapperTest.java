@@ -1,4 +1,4 @@
-package com.wcig.app.dao.sqmple;
+package com.wcig.app.dao.sample;
 
 import com.wcig.app.MybatisDemoApp;
 import com.wcig.app.dao.sample.SelectMapper;

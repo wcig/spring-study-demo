@@ -1,23 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <parent>
-        <artifactId>dao-demo</artifactId>
         <groupId>com.wcig.app</groupId>
+        <artifactId>dao-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -25,34 +12,55 @@
     <artifactId>mybatis-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>mybatis-demo</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>mybatis-quickstart-demo</module>
+        <module>mybatis-generator-demo</module>
+    </modules>
+
+    <properties>
+        <mybatis.version>3.5.3</mybatis.version>
+        <mybatis.spring.version>2.0.3</mybatis.spring.version>
+        <mybatis.dynamic.sql.version>1.2.1</mybatis.dynamic.sql.version>
+        <mybatis.generator.version>1.3.7</mybatis.generator.version>
+        <pagehelper.version>5.2.0</pagehelper.version>
+    </properties>
 
     <dependencies>
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.3</version>
+            <version>${mybatis.version}</version>
         </dependency>
 
         <!-- mybatis-spring -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>2.0.3</version>
+            <version>${mybatis.spring.version}</version>
         </dependency>
 
-        <!--mybatis dynamic sql-->
+        <!-- mybatis dynamic sql -->
         <dependency>
             <groupId>org.mybatis.dynamic-sql</groupId>
             <artifactId>mybatis-dynamic-sql</artifactId>
-            <version>1.2.1</version>
+            <version>${mybatis.dynamic.sql.version}</version>
+        </dependency>
+
+        <!--mybatis generator-->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis.generator.version}</version>
         </dependency>
 
         <!-- pagehelper -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>5.2.0</version>
+            <version>${pagehelper.version}</version>
         </dependency>
     </dependencies>
 </project>
