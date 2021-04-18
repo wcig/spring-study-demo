@@ -13,6 +13,7 @@
         <module>ioc-annotation-demo</module>
         <module>resource-demo</module>
         <module>aop-demo</module>
+        <module>dao-demo</module>
     </modules>
 
     <properties>
