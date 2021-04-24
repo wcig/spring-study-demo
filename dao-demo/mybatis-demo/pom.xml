@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.wcig.app</groupId>
@@ -17,8 +18,9 @@
         <module>mybatis-quickstart-demo</module>
         <module>mybatis-generator-demo</module>
         <module>mybatis-spring-xml-demo</module>
-      <module>mybatis-spring-annotation-demo</module>
-  </modules>
+        <module>mybatis-spring-annotation-demo</module>
+        <module>mybatis-generator-xml-demo</module>
+    </modules>
 
     <properties>
         <mybatis.version>3.5.3</mybatis.version>

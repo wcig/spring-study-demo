@@ -42,8 +42,8 @@
         </javaModelGenerator>
 
         <!--自动生成sqlmap xml文件配置-->
-        <sqlMapGenerator targetPackage="${basePackage}.dao.mapper"
-                         targetProject="${basePath}/src/main/java">
+        <sqlMapGenerator targetPackage="sqlmap"
+                         targetProject="${basePath}/src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
@@ -54,6 +54,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="%"/>
+        <!--<table tableName="%"/>-->
+        <table tableName="user"/>
     </context>
 </generatorConfiguration>
