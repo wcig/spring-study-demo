@@ -8,7 +8,8 @@
     <properties resource="generatorConfig.properties"/>
 
     <!--单个数据库环境配置-->
-    <context id="main" defaultModelType="flat" targetRuntime="MyBatis3">
+    <!--<context id="main" defaultModelType="flat" targetRuntime="MyBatis3">-->
+    <context id="main" targetRuntime="MyBatis3DynamicSql">
         <!--环境属性配置-->
         <property name="javaFileEncoding" value="UTF-8"/>
 
