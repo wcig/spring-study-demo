@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcig.app.dao.GradeStudentMapper">
+    <resultMap id="GradeMap" type="com.wcig.app.model.Grade">
+        <id column="grade_id" jdbcType="INTEGER" property="gradeId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
+    <resultMap id="StudentMap" type="com.wcig.app.model.Student">
+        <id column="student_id" jdbcType="INTEGER" property="studentId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="card_id" jdbcType="INTEGER" property="cardId" />
+        <result column="grade_id" jdbcType="INTEGER" property="gradeId" />
+    </resultMap>
+
+    <resultMap id="GradeStudentMap" type="com.wcig.app.model.GradeStudent">
+        <id column="grade_id" jdbcType="INTEGER" property="gradeId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <collection property="studentList" ofType="com.wcig.app.model.Student" resultMap="StudentMap"/>
+    </resultMap>
+
+    <select id="selectGradeByPk" parameterType="java.lang.Integer" resultMap="GradeMap">
+        select grade_id, name
+        from grade
+        where grade_id = #{gradeId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectGradeStudentByPk" parameterType="integer" resultMap="GradeStudentMap">
+        select g.*, s.*
+        from grade g inner join student s
+        on g.grade_id = s.grade_id
+        where g.grade_id = 1
+    </select>
+
+    <select id="selectStudentByGradeId" parameterType="integer" resultMap="StudentMap">
+        select student_id, name, card_id
+        from student
+        where grade_id = #{gradeId,jdbcType=INTEGER}
+    </select>
+</mapper>

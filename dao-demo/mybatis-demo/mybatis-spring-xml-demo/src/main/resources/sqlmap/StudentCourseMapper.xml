@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcig.app.dao.StudentCourseMapper">
+    <resultMap id="StudentMap" type="com.wcig.app.model.Student">
+        <id column="student_id" jdbcType="INTEGER" property="studentId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="card_id" jdbcType="INTEGER" property="cardId" />
+        <result column="grade_id" jdbcType="INTEGER" property="gradeId" />
+    </resultMap>
+
+    <resultMap id="CourseMap" type="com.wcig.app.model.Course">
+        <id column="course_id" jdbcType="INTEGER" property="courseId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
+    <resultMap id="StudentCourseMap" type="com.wcig.app.model.StudentCourse">
+        <id column="student_id" jdbcType="INTEGER" property="studentId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="card_id" jdbcType="INTEGER" property="cardId" />
+        <result column="grade_id" jdbcType="INTEGER" property="gradeId" />
+        <collection property="courseList" ofType="com.wcig.app.model.Course" resultMap="CourseMap"/>
+    </resultMap>
+
+    <resultMap id="CourseStudentMap" type="com.wcig.app.model.CourseStudent">
+        <id column="course_id" jdbcType="INTEGER" property="courseId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <collection property="studentList" ofType="com.wcig.app.model.Student" resultMap="StudentMap"/>
+    </resultMap>
+
+    <select id="selectStudentByPk" parameterType="java.lang.Integer" resultMap="StudentMap">
+        select student_id, name, card_id, grade_id
+        from student
+        where student_id = #{studentId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectCourseByPk" parameterType="java.lang.Integer" resultMap="CourseMap">
+        select course_id, name
+        from course
+        where course_id = #{courseId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectStudentGradeByStudentId" parameterType="integer" resultMap="StudentCourseMap">
+        select s.*, c.* from student s
+        inner join student_course_mapping scm on s.student_id = scm.student_id
+        inner join course c on c.course_id = scm.course_id
+        where s.student_id = #{studentId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectCourseStudentByCourseId" parameterType="integer" resultMap="CourseStudentMap">
+        select s.*, c.* from student s
+        inner join student_course_mapping scm on s.student_id = scm.student_id
+        inner join course c on c.course_id = scm.course_id
+        where c.course_id = #{courseId,jdbcType=INTEGER}
+    </select>
+</mapper>
