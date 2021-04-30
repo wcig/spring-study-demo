@@ -56,6 +56,7 @@ public class DBConfig {
         sqlSessionFactoryBean.setDataSource(druidDatasource());
         sqlSessionFactoryBean.setMapperLocations(resolveMapperLocations());
         sqlSessionFactoryBean.setPlugins(initPageHelperInterceptor());
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.wcig.app.model");
         return sqlSessionFactoryBean.getObject();
     }
 

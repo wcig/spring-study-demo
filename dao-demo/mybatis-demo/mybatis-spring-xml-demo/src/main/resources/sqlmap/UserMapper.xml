@@ -52,7 +52,7 @@
         </choose>
     </delete>
 
-    <insert id="insert" parameterType="com.wcig.app.model.User">
+    <insert id="insert" parameterType="user">
         INSERT INTO user (id, `name`, phone, password, create_time)
         VALUES (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
                 #{password,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT})
