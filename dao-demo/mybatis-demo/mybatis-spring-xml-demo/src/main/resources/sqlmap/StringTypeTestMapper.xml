@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcig.app.dao.StringTypeTestMapper">
+  <resultMap id="BaseResultMap" type="com.wcig.app.model.StringTypeTest">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="char_t" jdbcType="CHAR" property="charT" />
+    <result column="varchar_t" jdbcType="VARCHAR" property="varcharT" />
+    <result column="tinytext_t" jdbcType="VARCHAR" property="tinytextT" />
+    <result column="text_t" jdbcType="LONGVARCHAR" property="textT" />
+    <result column="mediumtext_t" jdbcType="LONGVARCHAR" property="mediumtextT" />
+    <result column="longtext_t" jdbcType="LONGVARCHAR" property="longtextT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from string_type_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wcig.app.model.StringTypeTest" useGeneratedKeys="true">
+    insert into string_type_test (id, char_t, varchar_t, 
+      tinytext_t, text_t, mediumtext_t, 
+      longtext_t)
+    values (#{id,jdbcType=INTEGER}, #{charT,jdbcType=CHAR}, #{varcharT,jdbcType=VARCHAR}, 
+      #{tinytextT,jdbcType=VARCHAR}, #{textT,jdbcType=LONGVARCHAR}, #{mediumtextT,jdbcType=LONGVARCHAR}, 
+      #{longtextT,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wcig.app.model.StringTypeTest">
+    update string_type_test
+    set char_t = #{charT,jdbcType=CHAR},
+      varchar_t = #{varcharT,jdbcType=VARCHAR},
+      tinytext_t = #{tinytextT,jdbcType=VARCHAR},
+      text_t = #{textT,jdbcType=LONGVARCHAR},
+      mediumtext_t = #{mediumtextT,jdbcType=LONGVARCHAR},
+      longtext_t = #{longtextT,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, char_t, varchar_t, tinytext_t, text_t, mediumtext_t, longtext_t
+    from string_type_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, char_t, varchar_t, tinytext_t, text_t, mediumtext_t, longtext_t
+    from string_type_test
+  </select>
+</mapper>

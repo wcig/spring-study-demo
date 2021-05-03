@@ -33,7 +33,9 @@
         </jdbcConnection>
 
         <!--数据库类型对应java类型解析配置-->
-        <javaTypeResolver type="com.wcig.app.resolver.DefaultJavaTypeResolver"/>
+        <javaTypeResolver type="com.wcig.app.resolver.DefaultJavaTypeResolver">
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
 
         <!--自动生成java bean配置-->
         <javaModelGenerator targetPackage="${basePackage}.dao.entity"
@@ -56,5 +58,9 @@
         </javaClientGenerator>
 
         <table tableName="%"/>
+        <!--<table tableName="int_type_test"/>-->
+        <!--<table tableName="string_type_test"/>-->
+        <!--<table tableName="time_type_test"/>-->
+        <!--<table tableName="enum_type_test"/>-->
     </context>
 </generatorConfiguration>

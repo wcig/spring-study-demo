@@ -1,8 +1,8 @@
--- 数据库
+-- 1.数据库
 CREATE
 DATABASE `spring_study_demo` DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
 
--- 用户信息表
+-- 2.用户信息表
 CREATE TABLE `spring_study_demo`.`user`
 (
     `id`          int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
@@ -13,6 +13,7 @@ CREATE TABLE `spring_study_demo`.`user`
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户信息表';
 
+-- 3.连表映射
 -- 一对一映射 student-card
 -- 一对多映射 grade-student
 -- 多对多映射 student-course
@@ -70,3 +71,49 @@ insert into student_course_mapping (student_id, course_id) value ('1', '1');
 insert into student_course_mapping (student_id, course_id) value ('1', '2');
 insert into student_course_mapping (student_id, course_id) value ('2', '1');
 insert into student_course_mapping (student_id, course_id) value ('2', '2');
+
+-- 4.类型测试表
+CREATE TABLE `spring_study_demo`.`int_type_test`
+(
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    tinyint_t tinyint,
+    smallint_t smallint,
+    middleint_t middleint,
+    int_t int,
+    bigint_t bigint,
+    float_t float,
+    double_t double,
+    decimal_t decimal(6,2),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数字类型测试表';
+
+CREATE TABLE `spring_study_demo`.`string_type_test`
+(
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    char_t char(32),
+    varchar_t varchar(32),
+    tinytext_t tinytext,
+    text_t text,
+    mediumtext_t mediumtext,
+    longtext_t longtext,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='字符串类型测试表';
+
+CREATE TABLE `spring_study_demo`.`time_type_test`
+(
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    year_t year,
+    date_t date,
+    time_t time,
+    datetime_t datetime,
+    timestamp_t timestamp,
+    bigint_t bigint,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='时间类型测试表';
+
+CREATE TABLE `spring_study_demo`.`enum_type_test`
+(
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    enum_t enum('f', 'm'),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='枚举类型测试表';

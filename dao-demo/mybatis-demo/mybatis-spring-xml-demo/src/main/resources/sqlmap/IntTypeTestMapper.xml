@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcig.app.dao.IntTypeTestMapper">
+  <resultMap id="BaseResultMap" type="com.wcig.app.model.IntTypeTest">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tinyint_t" jdbcType="TINYINT" property="tinyintT" />
+    <result column="smallint_t" jdbcType="SMALLINT" property="smallintT" />
+    <result column="middleint_t" jdbcType="INTEGER" property="middleintT" />
+    <result column="int_t" jdbcType="INTEGER" property="intT" />
+    <result column="bigint_t" jdbcType="BIGINT" property="bigintT" />
+    <result column="float_t" jdbcType="REAL" property="floatT" />
+    <result column="double_t" jdbcType="DOUBLE" property="doubleT" />
+    <result column="decimal_t" jdbcType="DECIMAL" property="decimalT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from int_type_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wcig.app.model.IntTypeTest" useGeneratedKeys="true">
+    insert into int_type_test (id, tinyint_t, smallint_t,
+                               middleint_t, int_t, bigint_t,
+                               float_t, double_t, decimal_t
+    )
+    values (#{id,jdbcType=INTEGER}, #{tinyintT,jdbcType=TINYINT}, #{smallintT,jdbcType=SMALLINT},
+            #{middleintT,jdbcType=INTEGER}, #{intT,jdbcType=INTEGER}, #{bigintT,jdbcType=BIGINT},
+            #{floatT,jdbcType=REAL}, #{doubleT,jdbcType=DOUBLE}, #{decimalT,jdbcType=DECIMAL}
+           )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wcig.app.model.IntTypeTest">
+    update int_type_test
+    set tinyint_t = #{tinyintT,jdbcType=TINYINT},
+        smallint_t = #{smallintT,jdbcType=SMALLINT},
+        middleint_t = #{middleintT,jdbcType=INTEGER},
+        int_t = #{intT,jdbcType=INTEGER},
+        bigint_t = #{bigintT,jdbcType=BIGINT},
+        float_t = #{floatT,jdbcType=REAL},
+        double_t = #{doubleT,jdbcType=DOUBLE},
+        decimal_t = #{decimalT,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, tinyint_t, smallint_t, middleint_t, int_t, bigint_t, float_t, double_t,
+           decimal_t
+    from int_type_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tinyint_t, smallint_t, middleint_t, int_t, bigint_t, float_t, double_t,
+           decimal_t
+    from int_type_test
+  </select>
+</mapper>
