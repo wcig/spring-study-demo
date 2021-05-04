@@ -29,7 +29,7 @@
         select g.*, s.*
         from grade g inner join student s
         on g.grade_id = s.grade_id
-        where g.grade_id = 1
+        where g.grade_id = #{gradeId,jdbcType=INTEGER}
     </select>
 
     <select id="selectStudentByGradeId" parameterType="integer" resultMap="StudentMap">
