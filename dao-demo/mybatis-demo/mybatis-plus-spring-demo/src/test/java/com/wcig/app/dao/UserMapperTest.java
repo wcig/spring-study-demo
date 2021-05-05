@@ -55,4 +55,10 @@ public class UserMapperTest {
         boolean result = userService.saveBatch(list);
         log.info("batch save result: {}", result);
     }
+
+    @Test
+    public void select() {
+        User user = userMapper.selectById(1);
+        log.info("select user result: {}", user);
+    }
 }
