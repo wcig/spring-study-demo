@@ -4,7 +4,8 @@
 out
 gen
 log
-.vscode/
+.vscode
+.DS_Store
 
 # Maven
 target
